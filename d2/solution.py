@@ -1,7 +1,7 @@
 import numpy as n
 p=print
 f=open('i.txt')
-a=[l.split(' ')for l in f.readlines()]
+a=[l.split()for l in f.readlines()]
 a=[(l[0], int(l[1]))for l in a]
 f='forward'
 d='down'
