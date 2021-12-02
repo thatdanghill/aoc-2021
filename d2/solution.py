@@ -1,11 +1,6 @@
-import numpy as n
-p=print
+import sys,numpy as n
 s=sum
-a=[l.split()for l in open('i')]
-a=[(c,int(v))for c,v in a]
-f='forward'
-d='down'
-z=[(0,v)[c==f]for c,v in a]
-m=[((-v,v)[c==d],0)[c==f]for c,v in a]
-p(s(z)*s(m))
-p(s(z)*s(n.cumsum(m)*z))
+a=[(l.split()[0][0],int(l.split()[1]))for l in open(sys.argv[1])]
+z=[v*(c=='f')for c,v in a]
+m=[(-v,v)[c<'e']*(c!='f')for c,v in a]
+print(f'silver: {s(z)*s(m)}\ngold: {s(z)*s(n.cumsum(m)*z)}')
