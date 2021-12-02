@@ -1,14 +1,14 @@
 import numpy as n
 p=print
-f=open('i.txt')
-a=[l.split()for l in f.readlines()]
-a=[(l[0], int(l[1]))for l in a]
+s=sum
+a=[l.split()for l in open('i.txt')]
+a=[(c,int(v))for c,v in a]
 f='forward'
 d='down'
 z=[(0,v)[c==f]for c,v in a]
-x=sum(z)
+x=s(z)
 m=[((-v,v)[c==d],0)[c==f]for c,v in a]
-y=sum(m)
+y=s(m)
 p(x*y)
-y=sum(n.cumsum(m)*z)
+y=s(n.cumsum(m)*z)
 p(x*y)
