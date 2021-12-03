@@ -1,14 +1,13 @@
 import sys
 r=range(12)
-a=[[2**(11-i)*int(l[i])for l in open(sys.argv[1])]for i in r]
-v=lambda x,c,b:[x(sorted(i)[::c],key=i.count)for i in b]
+s=sum
+a=[[2**(11-i)*int(l[i])for i in r]for l in open(sys.argv[1])]
+v=lambda x,c,b:[x(sorted(i)[::c],key=i.count)for i in zip(*b)]
 y=max,-1
 z=min,1
-def f(x):
-    *l,=zip(*a)
-    for i in r:
-        n=v(*x,zip(*l))[i]
-        l=[j for j in l if n==j[i]]
-        if len(l) == 1:
-            return sum(l[0])
-print(f'Silver: {sum(v(*y,a))*sum(v(*z,a))}\nGold: {f(y)*f(z)}')
+def f(x,l=a):
+ for i in r:
+  n=v(*x,l)[i]
+  l=[j for j in l if n==j[i]]
+  if len(l)==1:return s(l[0])
+print(f'Silver: {s(v(*y,a))*s(v(*z,a))}\nGold: {f(y)*f(z)}')
