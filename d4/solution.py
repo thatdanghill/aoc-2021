@@ -1,62 +1,17 @@
 import sys
-
-order,_,*rest = open(sys.argv[1]).readlines()
-
-acc = []
-bcc = []
-i = 0
-for line in rest:
-    if i%6 == 5:
-        acc.append(bcc)
-        bcc = []
-    else:
-        bcc.append([int(n) for n in line.split()])
-    i+=1
-
-order = [int(i) for i in order.split(',')]
-
-def calculate_score(board, bitmap):
-    antibit = [[not val for val in row] for row in bitmap]
-    return sum([sum([v1*v2 for v1,v2 in zip(r1,r2)]) for r1,r2 in zip(board,
-                                                                      antibit)])
-
-
-def run_bingo(boards):
-    bitmaps = [[[0 for _ in l2] for l2 in l1] for l1 in boards]
-    for num in order:
-        for bi, board in enumerate(boards):
-            for ci, col in enumerate(board):
-                for ri, val in enumerate(col):
-                    if val == num:
-                        bitmaps[bi][ci][ri] = 1
-
-            row_totals = [sum(row) for row in bitmaps[bi]]
-            col_totals = [sum(col) for col in zip(*bitmaps[bi])]
-            if (5 in row_totals) or (5 in col_totals):
-                return num*calculate_score(board, bitmaps[bi])
-
-def run_last_bingo(boards):
-    bitmaps = [[[0 for _ in l2] for l2 in l1] for l1 in boards]
-    for num in order:
-        topop = []
-        for bi, board in enumerate(boards):
-            for ci, col in enumerate(board):
-                for ri, val in enumerate(col):
-                    if val == num:
-                        bitmaps[bi][ci][ri] = 1
-            row_totals = [sum(row) for row in bitmaps[bi]]
-            col_totals = [sum(col) for col in zip(*bitmaps[bi])]
-            if (5 in row_totals) or (5 in col_totals):
-                topop.append(bi)
-
-        if len(boards) == 1 and len(topop) == 1:
-            print(boards[0])
-            print(bitmaps[0])
-            print(num)
-            return num*calculate_score(boards[0], bitmaps[0])
-
-        boards = [b for i,b in enumerate(boards) if i not in topop]
-        bitmaps = [b for i,b in enumerate(bitmaps) if i not in topop]
-
-print(run_bingo(acc.copy()))
-print(run_last_bingo(acc.copy()))
+O,*R=open(sys.argv[1])
+O=[int(i)for i in O.split(',')]
+l,r,*K=len,range
+s=sum
+v=lambda x:[x[i:i+5]for i in r(0,l(x),5)]
+c=lambda x,y:s([s([i*(~j+2)for i,j in zip(m,n)])for m,n in zip(x,y)])
+u=lambda x:5in[s(i)for i in x]
+A=v(v([int(i) for j in R for i in j.split()]))
+L=25*l(A)
+B=v(v([0]*L))
+for i in r(l(O)*L):
+ j,k,m,n=i//L,(i//25)%(l(A)),(i//5)%5,i%5
+ J,H=O[j],A[k]
+ if H[m][n]==J:B[k][m][n]=1
+ if (m==n>3)*(u(B[k])or u(zip(*B[k])))*(k not in K):K+=[k,J*c(H,B[k])]
+print(f'Silver: {K[1]}\nGold: {K[-1]}')
