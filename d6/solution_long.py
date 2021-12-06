@@ -9,4 +9,3 @@ def count_fish(gens):
         new_fish = new_fish[1:] + [old_fish[6]]
     return sum(old_fish + new_fish)
 print(f'Silver: {count_fish(80)}\nGold: {count_fish(256)}')
-
