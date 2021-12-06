@@ -1,5 +1,6 @@
 import sys
-A=[int(i)for i in open(sys.argv[1]).read().split(',')]
+F,=open(sys.argv[1])
+A=[int(i)for i in F.split(',')]
 def f(g):
  O,N=[A.count(i)for i in range(7)],[0]*9
  for _ in[1]*g:
