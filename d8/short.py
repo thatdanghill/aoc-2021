@@ -12,4 +12,4 @@ for S,D in A:
   s,Y,Z=v(s),~L({*M[4]}-m-{*s})+2,~L(m-{*s})+2
   M[((10,((0,9)[Y],6)[~Z+2])[L(s)==6],((2,5)[Y],3)[Z])[L(s)==5]]=s
  O+=int(''.join([str({i:j for j,i in M.items()if j!=10}[v(k)])for k in D]))
-print(f'Silver: {sum([L(j)in[2,3,4,7]for _,i in A for j in i])}\nGold: {O}')
+print(f'Silver: {sum([L(j)in r for _,i in A for j in i])}\nGold: {O}')
