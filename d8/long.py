@@ -46,5 +46,3 @@ for sigs, display in readings:
                                 in display])))
 
 print(f'Silver: {digit_1478}\nGold: {sum(outputs)}')
-
-
