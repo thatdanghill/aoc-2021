@@ -1,7 +1,6 @@
 import sys
 file,=open(sys.argv[1])
 crab_pos = [int(i) for i in file.split(',')]
-#crab_pos = [16, 1, 2, 0, 4, 2, 7, 1, 2, 14]
 crab_pos=sorted(crab_pos)
 med=crab_pos[len(crab_pos)//2]
 fuel_1 = sum([abs(pos-med) for pos in crab_pos])
