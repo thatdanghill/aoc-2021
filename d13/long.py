@@ -31,7 +31,7 @@ print(f'Silver: {silver}')
 xmax = max([p[0] for p in points]) + 1
 ymax = max([p[1] for p in points]) + 1
 
-dotmap = [['.']*xmax for _ in range(ymax)]
+dotmap = [[' ']*xmax for _ in range(ymax)]
 for x,y in points:
     dotmap[y][x] = '#'
 for row in dotmap:
